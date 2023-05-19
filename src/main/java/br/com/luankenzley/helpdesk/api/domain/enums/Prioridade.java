@@ -13,7 +13,6 @@ public enum Prioridade {
         this.codigo = codigo;
         this.descricao = descricao;
     }
-
     public Integer getCodigo() {
         return codigo;
     }
