@@ -1,6 +1,7 @@
 package br.com.luankenzley.helpdesk.api.domain;
 
 import br.com.luankenzley.helpdesk.api.domain.enums.Perfil;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import java.util.List;
 @Entity
 public class Tecnico extends Pessoa {
 
+    @JsonIgnore
     @OneToMany(mappedBy = "tecnico", cascade = CascadeType.ALL)
     private List<Chamado> chamados = new ArrayList<>();
 
