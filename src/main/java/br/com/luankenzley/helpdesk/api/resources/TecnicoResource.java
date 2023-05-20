@@ -1,5 +1,6 @@
 package br.com.luankenzley.helpdesk.api.resources;
 
+import br.com.luankenzley.helpdesk.api.domain.DTO.TecnicoDTO;
 import br.com.luankenzley.helpdesk.api.domain.Tecnico;
 import br.com.luankenzley.helpdesk.api.services.TecnicoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,9 @@ public class TecnicoResource {
     private TecnicoService tecnicoService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<Tecnico> findById(@PathVariable Integer id) {
+    public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id) {
         Tecnico obj = tecnicoService.findById(id);
 
-        return ResponseEntity.ok().body(obj);
+        return ResponseEntity.ok().body(new TecnicoDTO(obj));
     }
 }

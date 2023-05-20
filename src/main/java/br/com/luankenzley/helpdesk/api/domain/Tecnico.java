@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class Tecnico extends Pessoa {
-
     @JsonIgnore
     @OneToMany(mappedBy = "tecnico", cascade = CascadeType.ALL)
     private List<Chamado> chamados = new ArrayList<>();
