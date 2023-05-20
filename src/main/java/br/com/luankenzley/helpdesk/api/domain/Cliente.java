@@ -2,15 +2,15 @@ package br.com.luankenzley.helpdesk.api.domain;
 
 import br.com.luankenzley.helpdesk.api.domain.enums.Perfil;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 @Entity
 public class Cliente extends Pessoa {
 
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Chamado> chamados = new ArrayList<>();
 
     public Cliente() {

@@ -25,10 +25,10 @@ public class Chamado implements Serializable {
     private String observacoes;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "tecnico_id")
     private Tecnico tecnico;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente;
 
@@ -36,10 +36,8 @@ public class Chamado implements Serializable {
         super();
     }
 
-    public Chamado(Integer id, LocalDate dataAbertura, LocalDate dataFechamento, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico, Cliente cliente) {
+    public Chamado(Integer id, Prioridade prioridade, Status status, String titulo, String observacoes, Tecnico tecnico, Cliente cliente) {
         this.id = id;
-        this.dataAbertura = dataAbertura;
-        this.dataFechamento = dataFechamento;
         this.prioridade = prioridade;
         this.status = status;
         this.titulo = titulo;

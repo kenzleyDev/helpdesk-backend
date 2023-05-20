@@ -2,6 +2,7 @@ package br.com.luankenzley.helpdesk.api.domain;
 
 import br.com.luankenzley.helpdesk.api.domain.enums.Perfil;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.util.ArrayList;
@@ -9,7 +10,7 @@ import java.util.List;
 @Entity
 public class Tecnico extends Pessoa {
 
-    @OneToMany(mappedBy = "tecnico")
+    @OneToMany(mappedBy = "tecnico", cascade = CascadeType.ALL)
     private List<Chamado> chamados = new ArrayList<>();
 
     public Tecnico() {
