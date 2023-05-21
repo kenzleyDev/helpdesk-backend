@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/tecnicos")
 public class TecnicoResource {
-
     @Autowired
     private TecnicoService tecnicoService;
 
