@@ -45,7 +45,6 @@ public class TecnicoService {
         }
 
         obj = pessoaRepository.findByEmail(tecnicoDTO.getEmail());
-
         if(obj.isPresent() && obj.get().getId() != tecnicoDTO.getId()) {
             throw new DataIntegrityViolationException("E-mail já cadastrado no sistema!");
         }

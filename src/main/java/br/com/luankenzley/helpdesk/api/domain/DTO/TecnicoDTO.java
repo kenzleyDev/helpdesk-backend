@@ -3,7 +3,9 @@ package br.com.luankenzley.helpdesk.api.domain.DTO;
 import br.com.luankenzley.helpdesk.api.domain.Tecnico;
 import br.com.luankenzley.helpdesk.api.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -12,18 +14,29 @@ import java.util.stream.Collectors;
 
 public class TecnicoDTO implements Serializable {
 
-    private Integer id;
-    private String nome;
-    private String cpf;
-    private String email;
-    private String senha;
-    private Set<Integer> perfis = new HashSet<>();
+    private static final long serialVersionUID = 1L;
+
+    protected Integer id;
+    @NotNull(message = "O campo NOME é requerido")
+    protected String nome;
+    @NotNull(message = "O campo CPF é requerido")
+    protected String cpf;
+    @NotNull(message = "O campo EMAIL é requerido")
+    protected String email;
+    @NotNull(message = "O campo SENHA é requerido")
+    protected String senha;
+    protected Set<Integer> perfis = new HashSet<>();
+
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dataCriacao = LocalDate.now();
+    protected LocalDate dataCriacao = LocalDate.now();
+
     public TecnicoDTO() {
-        addPerfis(Perfil.CLIENTE);
+        super();
+        addPerfil(Perfil.CLIENTE);
     }
+
     public TecnicoDTO(Tecnico obj) {
+        super();
         this.id = obj.getId();
         this.nome = obj.getNome();
         this.cpf = obj.getCpf();
@@ -31,7 +44,7 @@ public class TecnicoDTO implements Serializable {
         this.senha = obj.getSenha();
         this.perfis = obj.getPerfis().stream().map(x -> x.getCodigo()).collect(Collectors.toSet());
         this.dataCriacao = obj.getDataCriacao();
-        addPerfis(Perfil.CLIENTE);
+        addPerfil(Perfil.CLIENTE);
     }
 
     public Integer getId() {
@@ -78,7 +91,7 @@ public class TecnicoDTO implements Serializable {
         return perfis.stream().map(x -> Perfil.toEnum(x)).collect(Collectors.toSet());
     }
 
-    public void addPerfis(Perfil perfil) {
+    public void addPerfil(Perfil perfil) {
         this.perfis.add(perfil.getCodigo());
     }
 
@@ -89,4 +102,5 @@ public class TecnicoDTO implements Serializable {
     public void setDataCriacao(LocalDate dataCriacao) {
         this.dataCriacao = dataCriacao;
     }
+
 }
