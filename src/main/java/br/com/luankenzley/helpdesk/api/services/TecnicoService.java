@@ -1,5 +1,6 @@
 package br.com.luankenzley.helpdesk.api.services;
 
+import br.com.luankenzley.helpdesk.api.domain.DTO.TecnicoDTO;
 import br.com.luankenzley.helpdesk.api.domain.Tecnico;
 import br.com.luankenzley.helpdesk.api.repository.TecnicoRepository;
 import br.com.luankenzley.helpdesk.api.services.exceptions.ObjectNotFoundException;
@@ -22,5 +23,11 @@ public class TecnicoService {
 
     public List<Tecnico> findAll() {
         return tecnicoRepository.findAll();
+    }
+
+    public Tecnico create(TecnicoDTO tecnicoDTO) {
+        tecnicoDTO.setId(null);
+        Tecnico newObj = new Tecnico(tecnicoDTO);
+        return tecnicoRepository.save(newObj);
     }
 }
