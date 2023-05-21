@@ -1,5 +1,6 @@
 package br.com.luankenzley.helpdesk.api.resources.exceptions;
 
+import br.com.luankenzley.helpdesk.api.services.exceptions.ConstraintViolationException;
 import br.com.luankenzley.helpdesk.api.services.exceptions.DataIntegrityViolationException;
 import br.com.luankenzley.helpdesk.api.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -51,5 +52,18 @@ public class ResourceExceptionHandler {
         }
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<StandardError> constraintViolationException(ConstraintViolationException ex,
+                                                                         HttpServletRequest request) {
+        StandardError error = new StandardError(
+                System.currentTimeMillis(),
+                HttpStatus.BAD_REQUEST.value(),
+                "CPF inválido",
+                ex.getMessage(),
+                request.getRequestURI());
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }

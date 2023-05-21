@@ -2,6 +2,7 @@ package br.com.luankenzley.helpdesk.api.domain;
 
 import br.com.luankenzley.helpdesk.api.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public abstract class Pessoa implements Serializable {
     protected Integer id;
     protected String nome;
     @Column(unique = true)
+    @CPF
     protected String cpf;
     @Column(unique = true)
     protected String email;
