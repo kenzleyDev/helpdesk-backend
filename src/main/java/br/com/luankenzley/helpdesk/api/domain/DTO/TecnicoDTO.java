@@ -18,14 +18,11 @@ public class TecnicoDTO implements Serializable {
     private String email;
     private String senha;
     private Set<Integer> perfis = new HashSet<>();
-
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dataCriacao = LocalDate.now();
-
     public TecnicoDTO() {
         addPerfis(Perfil.CLIENTE);
     }
-
     public TecnicoDTO(Tecnico obj) {
         this.id = obj.getId();
         this.nome = obj.getNome();
